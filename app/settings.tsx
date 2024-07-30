@@ -16,7 +16,7 @@ import {
 import { Text } from '~/components/ui/text';
 import { H1, Muted } from '~/components/ui/typography';
 
-export default function ModalScreen() {
+export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const { sideOffset, ...rootProps } = useModalPortalRoot();
   const contentInsets = {
@@ -48,7 +48,7 @@ export default function ModalScreen() {
               insets={contentInsets}
               sideOffset={sideOffset}
               className='w-full'
-              portalHost='modal-example'
+              portalHost='settings-example'
             >
               <SelectGroup>
                 <SelectLabel>Roles</SelectLabel>
@@ -81,7 +81,7 @@ export default function ModalScreen() {
           </View>
         </View>
       </View>
-      <PortalHost name='modal-example' />
+      <PortalHost name='settings-example' />
     </View>
   );
 }

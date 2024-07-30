@@ -44,15 +44,38 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/h
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Muted } from '~/components/ui/typography';
-import { CalendarDays } from  '~/lib/icons/CalendarDays';
+import { CalendarDays } from '~/lib/icons/CalendarDays';
 import { ChevronDown } from '~/lib/icons/ChevronDown';
+import { ChevronRight } from '~/lib/icons/ChevronRight';
 import { Plus } from '~/lib/icons/Plus';
 import { Minus } from '~/lib/icons/Minus';
 import { ArrowRightLeft } from '~/lib/icons/ArrowRightLeft';
 import { Info } from '~/lib/icons/Info';
 import { cn } from '~/lib/utils';
+import { useScrollToTop } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list';
 
-export default function ExampleScreen() {
+
+export default function HomeScreen() {
+
+
+  const latestData = [
+    'accordion',
+    'alert',
+    'alert-dialog',
+    'aspect-ratio',
+    'avatar',
+    'badge',
+    'bottom-sheet',
+    'button',
+    'toast',
+    'toggle',
+  ];
+  const ref = React.useRef(null);
+  useScrollToTop(ref);
+
+
+
   return (
     <View className='flex-1FIX p-6 justify-center gap-6'>
       <View className='flex-row gap-3'>
@@ -62,18 +85,18 @@ export default function ExampleScreen() {
             <Info size={Platform.OS == 'web' ? 14 : 16} className='text-foreground' />
           </TooltipTrigger>
           <TooltipContent side='bottom' insets={contentInsets} className='gap-1 py-3 px-5'>
-            <Text className='native:text-lg font-bold'>Things to try:</Text>
+            <Text className='native:text-lg font-bold'>2 Types of account:</Text>
             <Text className='native:text-lg text-muted-foreground'>
-              · {Platform.OS === 'web' ? 'Hover' : 'Press'} the team member's name
+              · Cash
             </Text>
             <Text className='native:text-lg text-muted-foreground'>
-              · {Platform.OS === 'web' ? 'Right click' : 'Press and hold'} the avatar
+              · Card
             </Text>
           </TooltipContent>
         </Tooltip>
       </View>
       <View className='w-full'>
-        <RoleDropdownSelect defaultValue='Billing' />
+        <RoleDropdownSelect defaultValue='All accounts' />
       </View>
       <View className='flex-row justify-between items-center'>
         {/* <Link href='/form' asChild>
@@ -164,6 +187,124 @@ export default function ExampleScreen() {
           </DialogContent>
         </Dialog>
       </View>
+      {/* Balance sheet */}
+      <View>
+        <Card className='w-full max-w-lg mx-auto'>
+          <CardHeader>
+            <View className='flex-row gap-3'>
+              <CardTitle className='pt-1'>Balance Sheet</CardTitle>
+            </View>
+            <CardDescription>Balance per day + previous balance</CardDescription>
+          </CardHeader>
+
+          <CardContent className='gap-2'>
+
+            <View className='flex-row gap-3'>
+              <View className='flex-1 flex-row gap-3'>
+                <View className='flex-1'>
+                  <Text numberOfLines={1} className='text-muted-foreground'>
+                    Income
+                  </Text>
+                </View>
+              </View>
+              <View className=''>
+                <Text className='text-muted-foreground'>
+                  0.00 +
+                </Text>
+              </View>
+            </View>
+
+            <View className='flex-row gap-3'>
+              <View className='flex-1 flex-row gap-3'>
+                <View className='flex-1'>
+                  <Text numberOfLines={1} className='text-muted-foreground'>
+                    Previous Balance
+                  </Text>
+                </View>
+              </View>
+              <View className=''>
+                <Text className='text-muted-foreground'>
+                  0.00 +
+                </Text>
+              </View>
+            </View>
+
+            <View className='flex-row gap-3'>
+              <View className='flex-1 flex-row gap-3'>
+                <View className='flex-1'>
+                  <Text numberOfLines={1} className='text-muted-foreground'>
+                    Expense
+                  </Text>
+                </View>
+              </View>
+              <View className=''>
+                <Text className='text-muted-foreground'>
+                  0.00 -
+                </Text>
+              </View>
+            </View>
+
+            <View className='border border-t-primary-foreground mt-1'>
+            </View>
+
+            <View className='flex-row gap-3'>
+              <View className='flex-1 flex-row gap-3'>
+                <View className='flex-1'>
+                  <Text numberOfLines={1} className='text-muted-foreground'>
+                    Current Balance
+                  </Text>
+                </View>
+              </View>
+              <View className=''>
+                <Text className='text-muted-foreground'>
+                  0.00 =
+                </Text>
+              </View>
+            </View>
+          </CardContent>
+        </Card>
+      </View>
+
+      {/* latest record */}
+      <View>
+        <Card className='w-full max-w-lg mx-auto'>
+          <CardHeader>
+            <View className='flex-row gap-3'>
+              <CardTitle className='pt-1'>Latest Records</CardTitle>
+            </View>
+            <CardDescription>Your last 10 transaction history</CardDescription>
+          </CardHeader>
+
+          <CardContent className='gap-2 h-72'>
+            <View className='flex-1'>
+              <FlashList
+                ref={ref}
+                data={latestData}
+                className='native:overflow-hidden rounded-t-lg'
+                estimatedItemSize={10}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  // <Link href={`/${item}`} asChild>
+                    <Button
+                      variant='secondary'
+                      size='lg'
+                      className={cn(
+                        'bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+                        index === 0 && 'rounded-t-lg',
+                        index === latestData.length - 1 && 'border-b rounded-b-lg'
+                      )}
+                    >
+                      <Text className='text-xl'>{toOptions(item)}</Text>
+                      <ChevronRight className='text-foreground/50' />
+                    </Button>
+                  // </Link>
+                )}
+                ListFooterComponent={<View className='py-4' />}
+              />
+            </View>
+          </CardContent>
+        </Card>
+      </View>
     </View>
   );
 }
@@ -193,11 +334,11 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
         <DropdownMenuGroup className='gap-1'>
           <DropdownMenuItem
             onPress={() => {
-              setValue('All');
+              setValue('All accounts');
             }}
             className={cn(
               'flex-col items-start gap-1',
-              value === 'All' ? 'bg-secondary/70' : ''
+              value === 'All accounts' ? 'bg-secondary/70' : ''
             )}
           >
             <Text>All accounts</Text>
@@ -228,4 +369,16 @@ function RoleDropdownSelect({ defaultValue }: { defaultValue: string }) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
+}
+
+function toOptions(name: string) {
+  const title = name
+    .split('-')
+    .map(function (str: string) {
+      return str.replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+      });
+    })
+    .join(' ');
+  return title;
 }

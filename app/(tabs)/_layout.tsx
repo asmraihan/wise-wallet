@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { ModalToggle } from '~/components/ModalToggle';
+import { SettingsBarToggle } from '~/components/SettingsBarToggle';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { LayoutPanelLeft } from 'lucide-react-native';
 import { MenuSquare } from 'lucide-react-native'; 
@@ -10,21 +10,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Demo',
+          title: 'Home',
           tabBarIcon({ color, size }) {
             return <LayoutPanelLeft color={color} size={size} />;
           },
-          headerLeft: () => <ModalToggle />,
+          headerLeft: () => <SettingsBarToggle />,
           headerRight: () => <ThemeToggle />,
         }}
       />
       <Tabs.Screen
-        name='components'
+        name='history'
         options={{
-          title: 'Components',
+          title: 'History',
           tabBarIcon({ color, size }) {
             return <MenuSquare color={color} size={size} />;
           },
+          headerLeft: () => <SettingsBarToggle />,
           headerRight: () => <ThemeToggle />,
         }}
       />

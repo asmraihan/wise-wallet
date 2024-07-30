@@ -8,7 +8,6 @@ export default function MaterialTopTabsLayout() {
   return (
     <>
       <Stack.Screen options={{ headerShadowVisible: false }} />
-
     </>
   );
 }

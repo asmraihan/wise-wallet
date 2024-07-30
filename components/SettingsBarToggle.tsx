@@ -1,13 +1,13 @@
 import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
-import { CircleUserRound } from '~/lib/icons/CircleUserRound';
+import { Menu } from '~/lib/icons/Menu';
 import { cn } from '~/lib/utils';
 
-export function ModalToggle() {
+export function SettingsBarToggle() {
   return (
     <Pressable
       onPress={() => {
-        router.push('/modal');
+        router.push('/settings');
       }}
       className='web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2'
     >
@@ -18,7 +18,7 @@ export function ModalToggle() {
             pressed && 'opacity-70'
           )}
         >
-          <CircleUserRound className='text-foreground' size={24} strokeWidth={1.25} />
+          <Menu className='text-foreground' size={24} strokeWidth={1.25} />
         </View>
       )}
     </Pressable>

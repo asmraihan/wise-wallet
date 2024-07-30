@@ -88,10 +88,10 @@ export default function RootLayout() {
             />
 
             <Stack.Screen
-              name='modal'
+              name='settings'
               options={{
                 presentation: 'modal',
-                title: 'Modal',
+                title: 'Settings',
               }}
             />
           </Stack>
