@@ -1,8 +1,11 @@
 import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
+import { Link } from 'expo-router';
+import { Search } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { Input } from '~/components/ui/input';
 import {
   Select,
@@ -28,58 +31,150 @@ export default function SettingsScreen() {
 
   return (
     <View {...rootProps}>
-      <View className='flex-1 justify-center items-center'>
-        <View className='p-4 native:pb-24 max-w-md gap-6'>
-          <View className='gap-1'>
-            <H1 className='text-foreground text-center'>Create an account</H1>
-            <Muted className='text-base text-center'>
-              Enter you email below to create your account
-            </Muted>
-          </View>
-          <Input placeholder='name@example.com' />
-          <Select>
-            <SelectTrigger>
-              <SelectValue
-                className='text-foreground text-sm native:text-lg'
-                placeholder='Select a role'
-              />
-            </SelectTrigger>
-            <SelectContent
-              insets={contentInsets}
-              sideOffset={sideOffset}
-              className='w-full'
-              portalHost='settings-example'
-            >
-              <SelectGroup>
-                <SelectLabel>Roles</SelectLabel>
-                <SelectItem label='Staff' value='staff'>
-                  Staff
-                </SelectItem>
-                <SelectItem label='Manager' value='manager'>
-                  Manager
-                </SelectItem>
-                <SelectItem label='Admin' value='admin'>
-                  Admin
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <View className='flex-row items-center gap-3'>
-            <View className='flex-1 h-px bg-muted' />
-            <Muted>OR CONTINUE WITH</Muted>
-            <View className='flex-1 h-px bg-muted' />
-          </View>
-          <Button>
-            <Text>Github</Text>
+      <View className='mx-6'>
+        <Card className='w-full max-w-lg mx-auto'>
+          <CardHeader>
+            <View className='flex-row gap-3'>
+              <CardTitle className='pt-1'>Wise Wallet</CardTitle>
+            </View>
+            <CardDescription>Your friendly expense tracker</CardDescription>
+          </CardHeader>
+
+          <CardContent className='gap-2'>
+            <View className='border border-t-primary-foreground mt-1'>
+            </View>
+            <View className='flex-row gap-3'>
+              <View className='flex-1 flex-row justify-end gap-3'>
+                <Text numberOfLines={1} className='text-muted-foreground/50'>
+                  Built by Asm Raihan
+                </Text>
+              </View>
+            </View>
+          </CardContent>
+        </Card>
+      </View>
+      <View className='mt-4 mx-4'>
+        <Text className='text-muted-foreground mx-4 my-2'>
+          Quick Access
+        </Text>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Home</Text>
           </Button>
-          <View>
-            <Muted className='text-center'>
-              By creating an account, you agree to our{' '}
-              <Muted className='underline'>Terms of Service</Muted> and{' '}
-              <Muted className='underline'>Privacy Policy</Muted>
-            </Muted>
-          </View>
-        </View>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Accounts</Text>
+          </Button>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Movement</Text>
+          </Button>
+        </Link>
+      </View>
+      <View className='mt-4 mx-4'>
+        <Text className='text-muted-foreground mx-4 my-2'>
+          Reports
+        </Text>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Reports by date</Text>
+          </Button>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Reports by category</Text>
+          </Button>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Transfer Reports</Text>
+          </Button>
+        </Link>
+      </View>
+      <View className='mt-4 mx-4'>
+        <Text className='text-muted-foreground mx-4 my-2'>
+          Settings
+        </Text>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Account Setting</Text>
+          </Button>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>Category Setting</Text>
+          </Button>
+        </Link>
+        <Link href={{
+          pathname: "./transaction/[transfer]",
+          params: { transfer: "transfer" }
+        }} asChild>
+          <Button
+            variant='ghost'
+            className='flex-row items-center justify-start gap-4'
+          >
+            <Search size={18} className='text-foreground' />
+            <Text className=''>User Setting</Text>
+          </Button>
+        </Link>
       </View>
       <PortalHost name='settings-example' />
     </View>

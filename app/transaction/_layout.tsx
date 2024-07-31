@@ -46,19 +46,19 @@ export default function MaterialTopTabsLayout() {
         <MaterialTopTabs.Screen
           name='index'
           options={{
-            title: 'index page',
+            title: 'Add Income',
           }}
         />
         <MaterialTopTabs.Screen
           name='expense'
           options={{
-            title: 'expense',
+            title: 'Add Expense',
           }}
         />
         <MaterialTopTabs.Screen
           name='transfer'
           options={{
-            title: 'Transfer',
+            title: 'Make Transfer',
           }}
         />
       </MaterialTopTabs>

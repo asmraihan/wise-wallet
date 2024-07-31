@@ -77,7 +77,7 @@ export default function RootLayout() {
               headerTitle(props) {
                 return <Text className='text-xl font-semibold'>{toOptions(props.children)}</Text>;
               },
-              headerRight: () => <ThemeToggle />,
+              // headerRight: () => <ThemeToggle />, 
             }}
           >
             <Stack.Screen

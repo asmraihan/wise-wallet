@@ -41,6 +41,7 @@ const Combobox = React.forwardRef<
   (
     {
       className,
+      // @ts-ignore
       textClass,
       variant = 'outline',
       size = 'sm',
@@ -66,8 +67,8 @@ const Combobox = React.forwardRef<
     const listItems = React.useMemo(() => {
       return search
         ? items.filter((item) => {
-            return item.label?.toLocaleLowerCase().includes(search.toLocaleLowerCase());
-          })
+          return item.label?.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+        })
         : items;
     }, [items, search]);
 
@@ -198,16 +199,16 @@ const Combobox = React.forwardRef<
             keyExtractor={(item, index) => (item as ComboboxOption)?.value ?? index.toString()}
             className={'px-4'}
             keyboardShouldPersistTaps='handled'
-            // ListEmptyComponent={() => {
-            //   return (
-            //     <View
-            //       className='items-center flex-row justify-center flex-1  px-3 py-5'
-            //       style={{ minHeight: 70 }}
-            //     >
-            //       <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
-            //     </View>
-            //   );
-            // }}
+          // ListEmptyComponent={() => {
+          //   return (
+          //     <View
+          //       className='items-center flex-row justify-center flex-1  px-3 py-5'
+          //       style={{ minHeight: 70 }}
+          //     >
+          //       <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
+          //     </View>
+          //   );
+          // }}
           />
         </BottomSheetContent>
       </BottomSheet>

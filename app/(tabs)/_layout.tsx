@@ -18,7 +18,7 @@ export default function TabsLayout() {
             marginBottom: 10,
           },
           headerLeft: () => <SettingsBarToggle />,
-          headerRight: () => <ThemeToggle />,
+          // headerRight: () => <ThemeToggle />,
         }}
       />
       <Tabs.Screen
