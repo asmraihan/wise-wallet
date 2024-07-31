@@ -8,7 +8,7 @@ import { Text } from '~/components/ui/text';
 import { PRIMITIVES } from '~/lib/constants';
 import { cn } from '~/lib/utils';
 
-export default function PrimitivesScreen() {
+export default function TransferHistoryScreen() {
   const [search, setSearch] = React.useState('');
   const ref = React.useRef(null);
   useScrollToTop(ref);

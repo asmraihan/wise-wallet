@@ -392,7 +392,7 @@ const FormDatePicker = React.forwardRef<
         <BottomSheetContent>
           <BottomSheetView hadHeader={false} className='pt-2'>
             <Calendar
-              style={{ height: 358 }}
+              style={{ height: 358, borderRadius: 8 }}
               onDayPress={(day) => {
                 onChange?.(day.dateString === value ? '' : day.dateString);
               }}

@@ -38,7 +38,37 @@ const categories = [
     id: 3,
     value: 'Transport Fee',
     label: 'transport-fee',
-  }
+  },
+  {
+    id: 4,
+    value: 'Electricity Bill',
+    label: 'electricity-bill',
+  },
+  {
+    id: 5,
+    value: 'Water Bill',
+    label: 'water-bill',
+  },
+  {
+    id: 6,
+    value: 'Internet Bill',
+    label: 'internet-bill',
+  },
+  {
+    id: 7,
+    value: 'Mobile Bill',
+    label: 'mobile-bill',
+  },
+  {
+    id: 8,
+    value: 'Grocery',
+    label: 'grocery',
+  },
+  {
+    id: 9,
+    value: 'Others',
+    label: 'others',
+  },
 
 ];
 
@@ -73,6 +103,8 @@ export default function IncomeScreen() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       amount: 0,
+      account: null,
+      category: null,
       date: new Date().toDateString(),
       details: '',
     },

@@ -32,7 +32,7 @@ function getTheme(
   if (isThemeDark) {
     return {
       backgroundColor: NAV_THEME.dark.background,
-      calendarBackground: NAV_THEME.dark.card,
+      calendarBackground: '#000000',
       textSectionTitleColor: NAV_THEME.dark.text,
       selectedDayBackgroundColor: SKY_500,
       selectedDayTextColor: '#000000',

@@ -10,7 +10,7 @@ import { COMPONENTS } from '~/lib/constants';
 import { ChevronRight } from 'lucide-react-native';
 import { cn } from '~/lib/utils';
 
-export default function HistoryScreen() {
+export default function TransactionHistoryScreen() {
   const [search, setSearch] = React.useState('');
   const ref = React.useRef(null);
   useScrollToTop(ref);

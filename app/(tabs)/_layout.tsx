@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { SettingsBarToggle } from '~/components/SettingsBarToggle';
 import { ThemeToggle } from '~/components/ThemeToggle';
-import { LayoutPanelLeft } from 'lucide-react-native';
+import { LayoutPanelLeft } from '~/lib/icons/LayoutPanelLeft';
 import { MenuSquare } from 'lucide-react-native'; 
 
 export default function TabsLayout() {
@@ -32,7 +32,7 @@ export default function TabsLayout() {
             marginBottom: 10,
           },
           headerLeft: () => <SettingsBarToggle />,
-          headerRight: () => <ThemeToggle />,
+          // headerRight: () => <ThemeToggle />, ASM
         }}
       />
     </Tabs>
