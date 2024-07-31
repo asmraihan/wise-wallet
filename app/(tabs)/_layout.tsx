@@ -14,6 +14,9 @@ export default function TabsLayout() {
           tabBarIcon({ color, size }) {
             return <LayoutPanelLeft color={color} size={size} />;
           },
+          tabBarStyle: {
+            marginBottom: 10,
+          },
           headerLeft: () => <SettingsBarToggle />,
           headerRight: () => <ThemeToggle />,
         }}
@@ -24,6 +27,9 @@ export default function TabsLayout() {
           title: 'History',
           tabBarIcon({ color, size }) {
             return <MenuSquare color={color} size={size} />;
+          },
+          tabBarStyle: {
+            marginBottom: 10,
           },
           headerLeft: () => <SettingsBarToggle />,
           headerRight: () => <ThemeToggle />,

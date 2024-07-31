@@ -40,19 +40,25 @@ export default function MaterialTopTabsLayout() {
             backgroundColor: colors.text,
           },
           tabBarScrollEnabled: true,
-          tabBarItemStyle: { width: width / 2 },
+          tabBarItemStyle: { width: width / 3 },
         }}
       >
         <MaterialTopTabs.Screen
           name='index'
           options={{
-            title: 'UI',
+            title: 'index page',
           }}
         />
         <MaterialTopTabs.Screen
-          name='primitives'
+          name='expense'
           options={{
-            title: 'Primitives',
+            title: 'expense',
+          }}
+        />
+        <MaterialTopTabs.Screen
+          name='transfer'
+          options={{
+            title: 'Transfer',
           }}
         />
       </MaterialTopTabs>

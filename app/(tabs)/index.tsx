@@ -99,93 +99,35 @@ export default function HomeScreen() {
         <RoleDropdownSelect defaultValue='All accounts' />
       </View>
       <View className='flex-row justify-between items-center'>
-        {/* <Link href='/form' asChild>
-          <Button variant='link' className='flex-row'>
-            <Text>Go To Form</Text>
-            <ChevronRight className='text-foreground' size={18} />
+
+        <Link href='/transaction' asChild>
+          <Button
+            variant='outline'
+            className='flex-row items-center justify-center gap-2'
+          >
+            <Plus size={18} className='text-foreground' />
+            <Text className=''>Income</Text>
           </Button>
-        </Link> */}
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant='outline'
-              size={Platform.OS === 'web' ? 'sm' : 'default'}
-              className='flex-row items-center justify-center gap-2'
-            >
-              <Plus size={18} className='text-foreground' />
-              <Text className=''>Income</Text>
-            </Button>
-          </DialogTrigger>
-          <DialogContent className='m-4'>
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button>
-                  <Text>OK</Text>
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant='outline'
-              size={Platform.OS === 'web' ? 'sm' : 'default'}
-              className='flex-row items-center justify-center gap-2'
-            >
-              <Minus size={18} className='text-foreground' />
-              <Text className=''>Expense</Text>
-            </Button>
-          </DialogTrigger>
-          <DialogContent className='m-4'>
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button>
-                  <Text>OK</Text>
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant='outline'
-              size={Platform.OS === 'web' ? 'sm' : 'default'}
-              className='flex-row items-center justify-center gap-2'
-            >
-              <ArrowRightLeft size={18} className='text-foreground' />
-              <Text className=''>Transfer</Text>
-            </Button>
-          </DialogTrigger>
-          <DialogContent className='m-4'>
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button>
-                  <Text>OK</Text>
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        </Link>
+        <Link href='/transaction/expense' asChild>
+          <Button
+            variant='outline'
+            className='flex-row items-center justify-center gap-2'
+          >
+            <Minus size={18} className='text-foreground' />
+            <Text className=''>Expense</Text>
+          </Button>
+        </Link>
+        <Link href='/transaction/transfer' asChild>
+          <Button
+            variant='outline'
+            className='flex-row items-center justify-center gap-2'
+          >
+            <ArrowRightLeft size={18} className='text-foreground' />
+            <Text className=''>Transfer</Text>
+          </Button>
+        </Link>
+
       </View>
       {/* Balance sheet */}
       <View>
@@ -285,18 +227,18 @@ export default function HomeScreen() {
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) => (
                   // <Link href={`/${item}`} asChild>
-                    <Button
-                      variant='secondary'
-                      size='lg'
-                      className={cn(
-                        'bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
-                        index === 0 && 'rounded-t-lg',
-                        index === latestData.length - 1 && 'border-b rounded-b-lg'
-                      )}
-                    >
-                      <Text className='text-xl'>{toOptions(item)}</Text>
-                      <ChevronRight className='text-foreground/50' />
-                    </Button>
+                  <Button
+                    variant='secondary'
+                    size='lg'
+                    className={cn(
+                      'bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+                      index === 0 && 'rounded-t-lg',
+                      index === latestData.length - 1 && 'border-b rounded-b-lg'
+                    )}
+                  >
+                    <Text className='text-xl'>{toOptions(item)}</Text>
+                    <ChevronRight className='text-foreground/50' />
+                  </Button>
                   // </Link>
                 )}
                 ListFooterComponent={<View className='py-4' />}
