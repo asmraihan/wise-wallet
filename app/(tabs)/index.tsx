@@ -109,7 +109,12 @@ export default function HomeScreen() {
             <Text className=''>Income</Text>
           </Button>
         </Link>
-        <Link href='/transaction/expense' asChild>
+        <Link
+          href={{
+            pathname: "./transaction/[expense]",
+            params: { expense: "expense" }
+          }}
+          asChild>
           <Button
             variant='outline'
             className='flex-row items-center justify-center gap-2'
@@ -118,7 +123,10 @@ export default function HomeScreen() {
             <Text className=''>Expense</Text>
           </Button>
         </Link>
-        <Link href='/transaction/transfer' asChild>
+        <Link     href={{
+            pathname: "./transaction/[transfer]",
+            params: { transfer: "transfer" }
+          }} asChild>
           <Button
             variant='outline'
             className='flex-row items-center justify-center gap-2'

@@ -60,6 +60,7 @@ export const COMPONENTS = [
   'toggle',
   'toggle-group',
   'toolbar',
+  'transaction',
   'tooltip',
   'typography',
 ];
