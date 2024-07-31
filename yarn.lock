@@ -3039,6 +3039,14 @@
     "@rn-primitives/slot" "1.0.3"
     "@rn-primitives/types" "1.0.3"
 
+"@rn-primitives/toast@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@rn-primitives/toast/-/toast-1.0.3.tgz"
+  integrity sha512-c89Z3RzaFdfAeHotUiUAQnwAscTJG+4O2vPoB37f2QwXU5r5bLlmfXJ6HQei76KrHGESwNAhnOX1RKDvzKr/3A==
+  dependencies:
+    "@rn-primitives/slot" "1.0.3"
+    "@rn-primitives/types" "1.0.3"
+
 "@rn-primitives/toggle-group@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@rn-primitives/toggle-group/-/toggle-group-1.0.3.tgz"
@@ -7417,6 +7425,11 @@ react-native-tab-view@^3.5.2, "react-native-tab-view@>= 3.0.0":
   integrity sha512-nE5WqjbeEPsWQx4mtz81QGVvgHRhujTNIIZiMCx3Bj6CBFDafbk7XZp9ocmtzXUQaZ4bhtVS43R4FIiR4LboJw==
   dependencies:
     use-latest-callback "^0.1.5"
+
+react-native-toast-message@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/react-native-toast-message/-/react-native-toast-message-2.2.0.tgz"
+  integrity sha512-AFti8VzUk6JvyGAlLm9/BknTNDXrrhqnUk7ak/pM7uCTxDPveAu2ekszU0on6vnUPFnG04H/QfYE2IlETqeaWw==
 
 react-native-web@*, react-native-web@~0.19.6:
   version "0.19.12"

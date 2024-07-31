@@ -21,6 +21,7 @@ import { RadioGroupItem } from '~/components/ui/radio-group';
 import { Label } from '~/components/ui/label';
 import { SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
 import { cn } from '~/lib/utils';
+import Toast from 'react-native-toast-message';
 
 const categories = [
   {
@@ -43,17 +44,20 @@ const categories = [
 
 
 const formSchema = z.object({
-  amount: z.number({
+  amount: z.coerce.number().min(1, {
     message: 'Please enter a valid number.',
   }),
-  account: z.any({
-    message: 'Please select an account.',
-  }),
+  account: z.object(
+    { value: z.string({   message: 'Please select an account.',}), label: z.string() },
+    {
+      message: 'Please select an account.',
+    }
+  ),
 
 });
 
 
-const emails = [
+const accounts = [
   { value: 'tom@cruise.com', label: 'tom@cruise.com' },
   { value: 'napoleon@dynamite.com', label: 'napoleon@dynamite.com' },
   { value: 'kunfu@panda.com', label: 'kunfu@panda.com' },
@@ -69,9 +73,8 @@ export default function IncomeScreen() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       amount: 0,
-      account: {},
-      date: false,
-      details: false,
+      date: new Date().toDateString(),
+      details: '',
     },
   });
 
@@ -83,15 +86,25 @@ export default function IncomeScreen() {
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
-      {
-        text: 'OK',
-        onPress: () => {
-          scrollRef.current?.scrollTo({ y: 0 });
-          form.reset();
-        },
-      },
-    ]);
+
+    // Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
+    //   {
+    //     text: 'OK',
+    //     onPress: () => {
+    //       scrollRef.current?.scrollTo({ y: 0 });
+    //       form.reset();
+    //     },
+    //   },
+    // ]);
+
+    Toast.show({
+      type: 'success',
+      text1: 'Success!',
+      text2: 'Amount added to account.',
+      visibilityTime: 1000,
+      topOffset: insets.top === 0 ? 12 : insets.top,
+    });
+
   }
 
   return (
@@ -144,7 +157,7 @@ export default function IncomeScreen() {
                 </SelectTrigger>
                 <SelectContent insets={contentInsets} style={{ width: selectTriggerWidth }} >
                   <SelectGroup>
-                    {emails.map((email) => (
+                    {accounts.map((email) => (
                       <SelectItem key={email.value} label={email.label} value={email.value}>
                         <Text>{email.label}</Text>
                       </SelectItem>
@@ -174,7 +187,7 @@ export default function IncomeScreen() {
             render={({ field }) => (
               <FormDatePicker
                 label='Select date'
-                description={`Ignoring this will default to ${new Date()}.`}
+                description={`Ignoring this will default to ${new Date()?.toDateString()}.`}
                 maxDate={new Date().toDateString()}
                 {...field}
               />

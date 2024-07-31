@@ -14,6 +14,7 @@ import { ThemeToggle } from '~/components/ThemeToggle';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Text } from '~/components/ui/text';
+import { ToastProvider } from '~/components/common/toast';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -98,7 +99,7 @@ export default function RootLayout() {
         </BottomSheetModalProvider>
         <PortalHost />
       </GestureHandlerRootView>
-      {/* <ToastProvider /> */}
+      <ToastProvider />
     </ThemeProvider>
   );
 }
