@@ -2972,7 +2972,7 @@
     "@rn-primitives/slot" "1.0.3"
     "@rn-primitives/types" "1.0.3"
 
-"@rn-primitives/portal@*", "@rn-primitives/portal@~1.0.3":
+"@rn-primitives/portal@*", "@rn-primitives/portal@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@rn-primitives/portal/-/portal-1.0.3.tgz"
   integrity sha512-7WtNh6HVyg/3F9PlSXHb/KcNAxKfCgIn7XXMu0bC8yv3K8hQZ0CZZ16XVJ7OAzJq5MyPbYLX341HHUPgg/TQ+g==

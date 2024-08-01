@@ -136,7 +136,6 @@ export default function IncomeScreen() {
       visibilityTime: 1000,
       topOffset: insets.top === 0 ? 12 : insets.top,
     });
-
   }
 
   return (

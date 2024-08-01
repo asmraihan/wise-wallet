@@ -133,8 +133,7 @@ export default function SideBarScreen() {
           </Button>
         </Link>
         <Link href={{
-          pathname: "./transaction/[transfer]",
-          params: { transfer: "transfer" }
+          pathname: "./categories",
         }} asChild>
           <Button
             variant='ghost'
