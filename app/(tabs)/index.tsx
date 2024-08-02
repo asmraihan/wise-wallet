@@ -1,36 +1,9 @@
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '~/components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from '~/components/ui/context-menu';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '~/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,11 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '~/components/ui/hover-card';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Muted } from '~/components/ui/typography';
-import { CalendarDays } from '~/lib/icons/CalendarDays';
 import { ChevronDown } from '~/lib/icons/ChevronDown';
 import { ChevronRight } from '~/lib/icons/ChevronRight';
 import { Plus } from '~/lib/icons/Plus';
@@ -55,9 +26,10 @@ import { cn } from '~/lib/utils';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 
-
 export default function HomeScreen() {
 
+  const ref = React.useRef(null);
+  useScrollToTop(ref);
 
   const latestData = [
     'accordion',
@@ -71,10 +43,6 @@ export default function HomeScreen() {
     'toast',
     'toggle',
   ];
-  const ref = React.useRef(null);
-  useScrollToTop(ref);
-
-
 
   return (
     <View className='flex-1FIX p-6 justify-center gap-6'>

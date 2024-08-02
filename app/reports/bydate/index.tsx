@@ -66,7 +66,7 @@ export default function ReportsByDateScreen() {
   useScrollToTop(ref);
 
   return (
-    <View className="mx-4 ">
+    <View className="flex-1 px-4">
       <View className='flex-row gap-3 my-2 mx-1'>
         <CardTitle className='pt-1 '>Report by date</CardTitle>
       </View>
@@ -77,13 +77,11 @@ export default function ReportsByDateScreen() {
           onChange={(date) => console.log(date)}
         />
       </View>
-      <View className='rounded-xl h-[90vh]'>
-        <View className='flex-1 rounded-xl mb-16'>
           <FlashList
             ref={ref}
             data={latestData}
             className='native:overflow-hidden rounded-t-lg'
-            estimatedItemSize={10}
+            estimatedItemSize={49}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => (
               // <Link href={`/${item}`} asChild>
@@ -104,7 +102,5 @@ export default function ReportsByDateScreen() {
             ListFooterComponent={<View className='py-4' />}
           />
         </View>
-      </View>
-    </View>
   );
 }

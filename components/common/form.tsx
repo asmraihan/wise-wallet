@@ -31,6 +31,7 @@ import { Calendar as CalendarIcon } from '../../lib/icons/Calendar';
 import { X } from '../../lib/icons/X';
 import { cn } from '../../lib/utils';
 import { Text } from '../ui/text';
+import { number } from 'zod';
 
 const Form = FormProvider;
 
@@ -182,7 +183,7 @@ type FormItemProps<T extends React.ElementType<any>, U> = Override<
 
 const FormInput = React.forwardRef<
   React.ElementRef<typeof Input>,
-  FormItemProps<typeof Input, string>
+  FormItemProps<typeof Input, string | number >
 >(({ label, description, onChange, ...props }, ref) => {
   const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();

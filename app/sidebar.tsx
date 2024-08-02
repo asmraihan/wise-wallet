@@ -1,39 +1,18 @@
-import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
-import { Link } from 'expo-router';
-import { Search } from 'lucide-react-native';
 import * as React from 'react';
+import { Link } from 'expo-router';
 import { View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PortalHost, useModalPortalRoot } from '@rn-primitives/portal';
 import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select';
 import { Text } from '~/components/ui/text';
-import { H1, Muted } from '~/components/ui/typography';
-
-import { CreditCard } from '~/lib/icons/CreditCard';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+import { LayoutPanelLeft } from '~/lib/icons/LayoutPanelLeft';
 import { Layers3 } from '~/lib/icons/Layers3';
+import { CreditCard } from '~/lib/icons/CreditCard';
 import { ScrollText } from '~/lib/icons/ScrollText';
 import { User } from '~/lib/icons/User';
-import { LayoutPanelLeft } from '~/lib/icons/LayoutPanelLeft';
 
 export default function SideBarScreen() {
-  const insets = useSafeAreaInsets();
   const { sideOffset, ...rootProps } = useModalPortalRoot();
-  const contentInsets = {
-    top: insets.top,
-    bottom: insets.bottom + Math.abs(sideOffset),
-    left: 16,
-    right: 16,
-  };
 
   return (
     <View {...rootProps} className=''>
@@ -60,102 +39,102 @@ export default function SideBarScreen() {
         </Card>
       </View>
       <View className='mx-6'>
-      <View className='mt-4 '>
-        <Text className='text-muted-foreground my-2'>
-          Quick Access
-        </Text>
-        <Link href={{
-          pathname: "./transaction/[transfer]",
-          params: { transfer: "transfer" }
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <LayoutPanelLeft size={18} className='text-foreground' />
-            <Text className=''>Home</Text>
-          </Button>
-        </Link>
-      </View>
-      <View className='mt-4'>
-        <Text className='text-muted-foreground my-2'>
-          Reports
-        </Text>
-        <Link href={{
-          pathname: "./reports/bydate",
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <ScrollText size={18} className='text-foreground' />
-            <Text className=''>Reports by date</Text>
-          </Button>
-        </Link>
-        <Link href={{
-          pathname: "./transaction/[transfer]",
-          params: { transfer: "transfer" }
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <ScrollText size={18} className='text-foreground' />
-            <Text className=''>Reports by category</Text>
-          </Button>
-        </Link>
-        <Link href={{
-          pathname: "./transaction/[transfer]",
-          params: { transfer: "transfer" }
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <ScrollText size={18} className='text-foreground' />
-            <Text className=''>Transfer Reports</Text>
-          </Button>
-        </Link>
-      </View>
-      <View className='mt-4 '>
-        <Text className='text-muted-foreground my-2'>
-          Settings Menu
-        </Text>
-        <Link href={{
-          pathname: "./accounts",
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <CreditCard size={18} className='text-foreground' />
-            <Text className=''>Account Setting</Text>
-          </Button>
-        </Link>
-        <Link href={{
-          pathname: "./categories",
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <Layers3 size={18} className='text-foreground' />
-            <Text className=''>Category Setting</Text>
-          </Button>
-        </Link>
-        <Link href={{
-          pathname: "./transaction/[transfer]",
-          params: { transfer: "transfer" }
-        }} asChild>
-          <Button
-            variant='ghost'
-            className='flex-row items-center justify-start gap-4'
-          >
-            <User size={18} className='text-foreground' />
-            <Text className=''>User Setting</Text>
-          </Button>
-        </Link>
-      </View>
+        <View className='mt-4 '>
+          <Text className='text-muted-foreground my-2'>
+            Quick Access
+          </Text>
+          <Link href={{
+            pathname: "./transaction/[transfer]",
+            params: { transfer: "transfer" }
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <LayoutPanelLeft size={18} className='text-foreground' />
+              <Text className=''>Home</Text>
+            </Button>
+          </Link>
+        </View>
+        <View className='mt-4'>
+          <Text className='text-muted-foreground my-2'>
+            Reports
+          </Text>
+          <Link href={{
+            pathname: "./reports/bydate",
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <ScrollText size={18} className='text-foreground' />
+              <Text className=''>Reports by date</Text>
+            </Button>
+          </Link>
+          <Link href={{
+            pathname: "./transaction/[transfer]",
+            params: { transfer: "transfer" }
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <ScrollText size={18} className='text-foreground' />
+              <Text className=''>Reports by category</Text>
+            </Button>
+          </Link>
+          <Link href={{
+            pathname: "./transaction/[transfer]",
+            params: { transfer: "transfer" }
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <ScrollText size={18} className='text-foreground' />
+              <Text className=''>Transfer Reports</Text>
+            </Button>
+          </Link>
+        </View>
+        <View className='mt-4 '>
+          <Text className='text-muted-foreground my-2'>
+            Settings Menu
+          </Text>
+          <Link href={{
+            pathname: "./accounts",
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <CreditCard size={18} className='text-foreground' />
+              <Text className=''>Account Setting</Text>
+            </Button>
+          </Link>
+          <Link href={{
+            pathname: "./categories",
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <Layers3 size={18} className='text-foreground' />
+              <Text className=''>Category Setting</Text>
+            </Button>
+          </Link>
+          <Link href={{
+            pathname: "./transaction/[transfer]",
+            params: { transfer: "transfer" }
+          }} asChild>
+            <Button
+              variant='ghost'
+              className='flex-row items-center justify-start gap-4'
+            >
+              <User size={18} className='text-foreground' />
+              <Text className=''>User Setting</Text>
+            </Button>
+          </Link>
+        </View>
       </View>
       <PortalHost name='settings-example' />
     </View>

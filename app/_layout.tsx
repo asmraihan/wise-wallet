@@ -1,5 +1,3 @@
-import '~/global.css';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
@@ -10,11 +8,11 @@ import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { PortalHost } from '@rn-primitives/portal';
 import { ThemeToggle } from '~/components/ThemeToggle';
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Text } from '~/components/ui/text';
 import { ToastProvider } from '~/components/common/toast';
+import '~/global.css';
 
 const LIGHT_THEME: Theme = {
   dark: false,
