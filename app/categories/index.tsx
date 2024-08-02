@@ -7,6 +7,8 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { cn } from "~/lib/utils";
 import { Plus } from '~/lib/icons/Plus';
+import { useCategoryDb } from "~/actions/useCategoryDb";
+import { Input } from "~/components/ui/input";
 
 export default function CategoriesScreen() {
   const navigation = useNavigation();
@@ -18,36 +20,24 @@ export default function CategoriesScreen() {
   const ref = React.useRef(null);
   useScrollToTop(ref);
 
-  const latestData = [
-    'toggle',
-    'alert',
-    'alert-dialog',
-    'aspect-ratio',
-    'avatar',
-    'badge',
-    'bottom-sheet',
-    'button',
-    'toast',
-    'toggle',
-    'alert',
-    'alert-dialog',
-    'aspect-ratio',
-    'avatar',
-    'badge',
-    'bottom-sheet',
-    'button',
-    'toast',
-    'toggle',
-    'alert',
-    'alert-dialog',
-    'aspect-ratio',
-    'avatar',
-    'badge',
-    'bottom-sheet',
-    'button',
-    'toast',
-    'toggle',
-  ];
+  const categoryDb = useCategoryDb();
+
+  const [data, setData] = React.useState([]);
+  console.log(data)
+  const [search, setSearch] = React.useState('');
+
+  async function getCategories() {
+    try {
+      const res = await categoryDb.searchByName(search);
+      setData(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, [search])
 
 
   return (
@@ -58,11 +48,19 @@ export default function CategoriesScreen() {
         </View>
         <CardDescription>All available Categories</CardDescription>
       </CardHeader>
+      <View className='mx-4 mb-4'>
+        <Input
+          placeholder='Search category...'
+          clearButtonMode='always'
+          value={search}
+          onChangeText={setSearch}
+        />
+      </View>
       <View>
         <Button
           variant='default'
           size={"icon"}
-          className='flex-row items-center justify-center gap-2 p-8 rounded-full absolute -bottom-[80vh] right-[4vh]'
+          className='flex-row items-center justify-center gap-2 p-8 rounded-full absolute -bottom-[75vh] right-[4vh]'
           style={{ zIndex: 1 }}
           onPress={() => {
             {
@@ -75,9 +73,9 @@ export default function CategoriesScreen() {
       </View>
       <FlashList
         ref={ref}
-        data={latestData}
+        data={data}
         className='native:overflow-hidden rounded-t-lg mx-4'
-        estimatedItemSize={49}
+        estimatedItemSize={20}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
           <Button
@@ -87,10 +85,10 @@ export default function CategoriesScreen() {
             className={cn(
               'opacity-100 bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-center',
               index === 0 && 'rounded-t-lg',
-              index === latestData.length - 1 && 'border-b rounded-b-lg'
+              index === data.length - 1 && 'border-b rounded-b-lg'
             )}
           >
-            <Text className='text-primary'>{(item)}</Text>
+            <Text className='text-primary'>{(item?.name)}</Text>
           </Button>
         )}
         ListFooterComponent={<View className='py-4' />}
