@@ -12,6 +12,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Text } from '~/components/ui/text';
 import { ToastProvider } from '~/components/common/toast';
+
+import { SQLiteProvider } from "expo-sqlite"
+import { initializeDatabase } from "~/database/initDb"
+
 import '~/global.css';
 
 const LIGHT_THEME: Theme = {
@@ -66,38 +70,40 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <GestureHandlerRootView>
-        <BottomSheetModalProvider>
-          <Stack
-            initialRouteName='(tabs)'
-            screenOptions={{
-              headerBackTitle: 'Back',
-              headerTitle(props) {
-                return <Text className='text-xl font-semibold'>{toOptions(props.children)}</Text>;
-              },
-              // headerRight: () => <ThemeToggle />, 
-            }}
-          >
-            <Stack.Screen
-              name='(tabs)'
-              options={{
-                headerShown: false,
+      <SQLiteProvider databaseName="wallet.db" onInit={initializeDatabase}>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <GestureHandlerRootView>
+          <BottomSheetModalProvider>
+            <Stack
+              initialRouteName='(tabs)'
+              screenOptions={{
+                headerBackTitle: 'Back',
+                headerTitle(props) {
+                  return <Text className='text-xl font-semibold'>{toOptions(props.children)}</Text>;
+                },
+                // headerRight: () => <ThemeToggle />, 
               }}
-            />
+            >
+              <Stack.Screen
+                name='(tabs)'
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name='sidebar'
-              options={{
-                presentation: 'modal',
-                title: 'Settings Menu',
-              }}
-            />
-          </Stack>
-        </BottomSheetModalProvider>
-        <PortalHost />
-      </GestureHandlerRootView>
-      <ToastProvider />
+              <Stack.Screen
+                name='sidebar'
+                options={{
+                  presentation: 'modal',
+                  title: 'Settings Menu',
+                }}
+              />
+            </Stack>
+          </BottomSheetModalProvider>
+          <PortalHost />
+        </GestureHandlerRootView>
+        <ToastProvider />
+      </SQLiteProvider>
     </ThemeProvider>
   );
 }

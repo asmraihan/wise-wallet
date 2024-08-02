@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -13,8 +12,6 @@ import {
     SelectValue,
 } from '~/components/ui/select';
 import { Text } from '~/components/ui/text';
-import { H1, Muted } from '~/components/ui/typography';
-
 import {
     Form,
     FormCheckbox,
@@ -34,8 +31,12 @@ import Toast from "react-native-toast-message";
 import { cn } from '~/lib/utils';
 import { router } from 'expo-router';
 
+import { useCategoryDb } from '~/actions/useCategoryDb';
+
 export default function CategoryForm() {
     const insets = useSafeAreaInsets();
+
+    const categoryDb = useCategoryDb();
 
     const types = [
         { value: 'INCOME', label: 'Income' },
@@ -61,7 +62,7 @@ export default function CategoryForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
-            type: { value: '', label: '' },
+            type: undefined,
         },
     });
 
@@ -72,16 +73,28 @@ export default function CategoryForm() {
         right: 12,
     };
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const res = await categoryDb.create({
+                name: values.name,
+                type: values.type.value
+            });
 
-        Toast.show({
-            type: 'success',
-            text1: 'Success!',
-            text2: 'Amount added to account.',
-            visibilityTime: 1000,
-            topOffset: insets.top === 0 ? 12 : insets.top,
-        });
-        router.push('../');
+            console.log(res, "category created successfully");
+
+            Toast.show({
+                type: 'success',
+                text1: 'Success!',
+                text2: 'Category created successfully.',
+                visibilityTime: 1000,
+                topOffset: insets.top === 0 ? 12 : insets.top,
+            });
+            router.push('../');
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 
@@ -112,7 +125,7 @@ export default function CategoryForm() {
                             name='type'
                             render={({ field }) => (
                                 <FormSelect
-                                    label='Select category type'
+                                    label='Type'
                                     {...field}
                                 >
                                     <SelectTrigger
@@ -130,6 +143,7 @@ export default function CategoryForm() {
                                     </SelectTrigger>
                                     <SelectContent insets={contentInsets} style={{ width: selectTriggerWidth }} >
                                         <SelectGroup>
+                                            <SelectLabel>Category Type</SelectLabel>
                                             {types.map((type) => (
                                                 <SelectItem key={type.value} label={type.label} value={type.value}>
                                                     <Text>{type.label}</Text>
