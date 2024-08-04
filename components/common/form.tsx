@@ -467,7 +467,7 @@ const FormCombobox = React.forwardRef<
       {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
       <Combobox
         ref={ref}
-        placeholder='Select framework'
+        placeholder={label}
         aria-labelledby={formItemNativeID}
         aria-describedby={
           !error

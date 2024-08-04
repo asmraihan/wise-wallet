@@ -1,6 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
 
-export type Category = {
+export type CategoryType = {
     id: number;
     name: string;
     type: string;
@@ -11,7 +11,7 @@ export function useCategoryDb() {
 
     const sqlite = useSQLiteContext();
 
-    async function create(data: Omit<Category, "id">) {
+    async function create(data: Omit<CategoryType, "id">) {
         const statement = await sqlite.prepareAsync(
             `INSERT INTO category (name, type) VALUES ($name, $type)`
         )
@@ -37,7 +37,7 @@ export function useCategoryDb() {
         try {
             const query = "SELECT * FROM category WHERE name LIKE ?"
 
-            const response = await sqlite.getAllAsync<Category>(
+            const response = await sqlite.getAllAsync<CategoryType>(
                 query,
                 `%${name}%`
             )
@@ -49,16 +49,15 @@ export function useCategoryDb() {
     }
 
 
-    async function update(data: Category) {
+    async function update(data: Omit<CategoryType, "type">) {
         const statement = await sqlite.prepareAsync(
-            "UPDATE category SET name = $name, type = $type WHERE id = $id"
+            "UPDATE category SET name = $name WHERE id = $id"
         )
 
         try {
             await statement.executeAsync({
                 $id: data.id,
                 $name: data.name,
-                $type: data.type
             })
         } catch (error) {
             throw error
@@ -79,7 +78,7 @@ export function useCategoryDb() {
         try {
             const query = "SELECT * FROM category WHERE id = ?"
 
-            const response = await sqlite.getFirstAsync<Category>(query, [
+            const response = await sqlite.getFirstAsync<CategoryType>(query, [
                 id,
             ])
 

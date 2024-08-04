@@ -2973,7 +2973,7 @@
     "@rn-primitives/types" "1.0.3"
     "@rn-primitives/utils" "1.0.3"
 
-"@rn-primitives/popover@1.0.3":
+"@rn-primitives/popover@^1.0.3", "@rn-primitives/popover@1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@rn-primitives/popover/-/popover-1.0.3.tgz"
   integrity sha512-OSd34B1mSL92xO8WGkDNf3G8b1wKWSzUXmydVWv98d9LSwMBdOvBTJzKmvwCXDOoSJvR758wbuJkhhEQyKxtrg==

@@ -38,7 +38,7 @@ export default function TransferHistoryScreen() {
             variant='secondary'
             size='lg'
             className={cn(
-              'opacity-100 bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-center',
+              'opacity-100 bg-secondary/25 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-center',
               index === 0 && 'rounded-t-lg',
               index === data.length - 1 && 'border-b rounded-b-lg'
             )}

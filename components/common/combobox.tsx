@@ -44,7 +44,7 @@ const Combobox = React.forwardRef<
       // @ts-ignore
       textClass,
       variant = 'outline',
-      size = 'sm',
+      size = 'default',
       inputProps,
       placeholder,
       items,
@@ -90,8 +90,7 @@ const Combobox = React.forwardRef<
         return (
           <Button
             variant='ghost'
-            className='items-center flex-row android:flex-1 justify-between px-3 py-4'
-            style={{ minHeight: 70 }}
+            className='items-center flex-row android:flex-1 justify-between h-4'
             onPress={() => {
               if (onSelectedItemChange) {
                 onSelectedItemChange(onItemChange(listItem));
@@ -103,8 +102,26 @@ const Combobox = React.forwardRef<
             <View className='flex-row flex-1'>
               <Text className={'text-foreground text-xl'}>{listItem.label}</Text>
             </View>
-            {isSelected && <Check size={24} className={'text-foreground px-6 mt-1.5'} />}
+            {isSelected && <Check size={24} className={'text-foreground px-6'} />}
           </Button>
+
+          //   <Button
+          //   variant='secondary'
+          //   size='lg'
+          //   className={cn(
+          //     'bg-secondary/25 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+          //   )}
+          //   onPress={() => {
+          //     if (onSelectedItemChange) {
+          //       onSelectedItemChange(onItemChange(listItem));
+          //       return;
+          //     }
+          //     setSelectedItem(onItemChange(listItem));
+          //   }}
+          // >
+          //   <Text className='text-xl text-foreground'>{listItem.label}</Text>
+          //   {isSelected && <Check size={24} className={'text-foreground px-6'} />}
+          // </Button>
         );
       },
       [selectedItem, selectedItemProp]
@@ -199,16 +216,16 @@ const Combobox = React.forwardRef<
             keyExtractor={(item, index) => (item as ComboboxOption)?.value ?? index.toString()}
             className={'px-4'}
             keyboardShouldPersistTaps='handled'
-          // ListEmptyComponent={() => {
-          //   return (
-          //     <View
-          //       className='items-center flex-row justify-center flex-1  px-3 py-5'
-          //       style={{ minHeight: 70 }}
-          //     >
-          //       <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
-          //     </View>
-          //   );
-          // }}
+          ListEmptyComponent={() => {
+            return (
+              <View
+                className='items-center flex-row justify-center flex-1  px-3 py-5'
+                style={{ minHeight: 70 }}
+              >
+                <Text className={'text-muted-foreground text-xl text-center'}>{emptyText}</Text>
+              </View>
+            );
+          }}
           />
         </BottomSheetContent>
       </BottomSheet>

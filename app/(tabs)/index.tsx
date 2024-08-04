@@ -207,7 +207,7 @@ export default function HomeScreen() {
                     variant='secondary'
                     size='lg'
                     className={cn(
-                      'bg-secondary/40 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
+                      'bg-secondary/25 pl-4 pr-1.5 border-x border-t border-foreground/5 rounded-none flex-row justify-between',
                       index === 0 && 'rounded-t-lg',
                       index === latestData.length - 1 && 'border-b rounded-b-lg'
                     )}

@@ -55,7 +55,6 @@ export default function CategoryForm() {
                 message: 'Please select a type.',
             }
         ),
-
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -86,7 +85,7 @@ export default function CategoryForm() {
                 type: 'success',
                 text1: 'Success!',
                 text2: 'Category created successfully.',
-                visibilityTime: 1000,
+                visibilityTime: 1500,
                 topOffset: insets.top === 0 ? 12 : insets.top,
             });
             router.push('../');
