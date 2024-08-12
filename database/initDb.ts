@@ -8,10 +8,19 @@ export async function initializeDatabase(database: SQLiteDatabase) {
       type TEXT NOT NULL
     );
   `)
+
   await database.execAsync(`
-      CREATE TABLE IF NOT EXISTS account (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, balance REAL NOT NULL);
-      INSERT INTO account (name, balance) VALUES ('cash', 0);
-      INSERT INTO account (name, balance) VALUES ('card', 0);
-      INSERT INTO account (name, balance) VALUES ('savings', 0);
-      `);
+    CREATE TABLE IF NOT EXISTS account (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE,
+      balance REAL NOT NULL
+    );
+    INSERT INTO account (name, balance) VALUES ('cash', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+    INSERT INTO account (name, balance) VALUES ('card', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+    INSERT INTO account (name, balance) VALUES ('savings', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+  `);
+  
 }

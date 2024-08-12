@@ -32,6 +32,7 @@ import { X } from '../../lib/icons/X';
 import { cn } from '../../lib/utils';
 import { Text } from '../ui/text';
 import { number } from 'zod';
+import { ComboboxTransaction } from './comboboxTransaction';
 
 const Form = FormProvider;
 
@@ -461,11 +462,11 @@ const FormCombobox = React.forwardRef<
   FormItemProps<typeof Combobox, ComboboxOption | null>
 >(({ label, description, value, onChange, ...props }, ref) => {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
-
+  console.log( props);
   return (
     <FormItem>
       {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
-      <Combobox
+      <ComboboxTransaction
         ref={ref}
         placeholder={label}
         aria-labelledby={formItemNativeID}

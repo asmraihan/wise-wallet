@@ -56,7 +56,7 @@ export default function AccountsScreen() {
           </View>
         ) : (
           data.map((item) => (
-            <Card className='w-full max-w-lg mx-auto my-2'>
+            <Card key={item.id} className='w-full max-w-lg mx-auto my-2'>
             <CardHeader>
               <View className='flex-row gap-3'>
                 <CardTitle className='pt-1'>

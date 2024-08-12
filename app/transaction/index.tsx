@@ -22,89 +22,88 @@ import { Label } from '~/components/ui/label';
 import { SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
 import { cn } from '~/lib/utils';
 import Toast from 'react-native-toast-message';
-
-const categories = [
-  {
-    id: 1,
-    value: 'House Rent',
-    label: 'house-rent',
-  },
-  {
-    id: 2,
-    value: 'Tuition Fee',
-    label: 'tuition-fee',
-  },
-  {
-    id: 3,
-    value: 'Transport Fee',
-    label: 'transport-fee',
-  },
-  {
-    id: 4,
-    value: 'Electricity Bill',
-    label: 'electricity-bill',
-  },
-  {
-    id: 5,
-    value: 'Water Bill',
-    label: 'water-bill',
-  },
-  {
-    id: 6,
-    value: 'Internet Bill',
-    label: 'internet-bill',
-  },
-  {
-    id: 7,
-    value: 'Mobile Bill',
-    label: 'mobile-bill',
-  },
-  {
-    id: 8,
-    value: 'Grocery',
-    label: 'grocery',
-  },
-  {
-    id: 9,
-    value: 'Others',
-    label: 'others',
-  },
-
-];
+import { CategoryType, useCategoryDb } from '~/actions/useCategoryDb';
+import { useFocusEffect } from 'expo-router';
+import { AccountType, useAccountDb } from '~/actions/useAccountDb';
 
 
-const formSchema = z.object({
-  amount: z.coerce.number().min(1, {
-    message: 'Please enter a valid number.',
-  }),
-  account: z.object(
-    { value: z.string({   message: 'Please select an account.',}), label: z.string() },
-    {
-      message: 'Please select an account.',
-    }
-  ),
-
-});
-
-
-const accounts = [
-  { value: 'tom@cruise.com', label: 'tom@cruise.com' },
-  { value: 'napoleon@dynamite.com', label: 'napoleon@dynamite.com' },
-  { value: 'kunfu@panda.com', label: 'kunfu@panda.com' },
-
-];
 
 
 export default function IncomeScreen() {
+
   const scrollRef = React.useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
   const [selectTriggerWidth, setSelectTriggerWidth] = React.useState(0);
+
+  const [accountData, setAccountData] = React.useState<AccountType[]>([]);
+  const [categoryData, setCategoryData] = React.useState<CategoryType[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  const accountDb = useAccountDb();
+  async function getAccounts() {
+    setIsLoading(true);
+    try {
+      const res = await accountDb.list();
+      setAccountData(res)
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+
+  const categoryDb = useCategoryDb();
+
+  async function getCategories() {
+    setIsLoading(true);
+    try {
+      const res = await categoryDb.searchByName("");
+      setCategoryData(res)
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getAccounts();
+      getCategories();
+    }, [])
+  )
+
+
+
+  const formSchema = z.object({
+    amount: z.coerce.number().min(1, {
+      message: 'Please enter a valid number.',
+    }),
+    account: z.object(
+      { label: z.string(), value: z.number() },
+      {
+        message: 'Please select an account.',
+      }
+    ),
+    category: z.object(
+      { name: z.string(), id: z.number(), type: z.string() },
+      {
+        message: 'Please select a category.',
+      }
+    ),
+    date: z.string(),
+    details: z.optional(z.string()),
+
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       amount: 0,
-      account: null,
-      category: null,
+      account: undefined,
+      category: undefined,
       date: new Date().toDateString(),
       details: '',
     },
@@ -118,6 +117,8 @@ export default function IncomeScreen() {
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+
+    console.log(values, "values");
 
     // Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
     //   {
@@ -169,6 +170,7 @@ export default function IncomeScreen() {
             control={form.control}
             name='account'
             render={({ field }) => (
+              // @ts-ignore
               <FormSelect
                 label='Select an account'
                 {...field}
@@ -183,14 +185,18 @@ export default function IncomeScreen() {
                       'text-sm native:text-lg',
                       field.value ? 'text-foreground' : 'text-muted-foreground'
                     )}
-                    placeholder='Select a verified email'
+                    placeholder='Select an account'
                   />
                 </SelectTrigger>
                 <SelectContent insets={contentInsets} style={{ width: selectTriggerWidth }} >
                   <SelectGroup>
-                    {accounts.map((email) => (
-                      <SelectItem key={email.value} label={email.label} value={email.value}>
-                        <Text>{email.label}</Text>
+                    {accountData.map((acc) => (
+                      <SelectItem className='capitalize' key={acc.id}
+                        label={acc.name === 'cash' ? 'Cash account' : acc.name === 'card' ? 'Card account' : 'Savings account'}
+                        // @ts-ignore
+                        value={acc.id}
+                      >
+                        <Text>{acc.name}</Text>
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -206,7 +212,8 @@ export default function IncomeScreen() {
               <FormCombobox
                 label='Select a category'
                 description='Ignoring this will default to general.'
-                items={categories}
+                // @ts-ignore
+                items={categoryData}
                 {...field}
               />
             )}
@@ -229,6 +236,7 @@ export default function IncomeScreen() {
             control={form.control}
             name='details'
             render={({ field }) => (
+              // @ts-ignore
               <FormTextarea
                 label='Details of income'
                 placeholder='Write details ...'
