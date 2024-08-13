@@ -16,7 +16,7 @@ export function useTransactionDb() {
     const sqlite = useSQLiteContext();
 
     async function create(data: Omit<TransactionType, "id">) {
-        console.log(data, "data")
+        console.log(data, "data");
         try {
             // Retrieve the current balance of the account
             const accountResult = await sqlite.getFirstAsync<{ balance: number }>(
@@ -24,18 +24,23 @@ export function useTransactionDb() {
                 { $accountId: data.account }
             );
             const currentBalance = accountResult?.balance ?? 0;
-
+    
             // Calculate the new balance
             const newBalance = data.type === 'INCOME'
                 ? currentBalance + data.amount
                 : currentBalance - data.amount;
-
+    
+            // Check if the new balance would be negative
+            if (newBalance < 0) {
+                return { error: 'Insufficient funds' };
+            }
+    
             // Update the account balance
             await sqlite.runAsync(
                 `UPDATE account SET balance = $newBalance WHERE id = $accountId`,
                 { $newBalance: newBalance, $accountId: data.account }
             );
-
+    
             // Insert the transaction row
             const result = await sqlite.runAsync(
                 `INSERT INTO transactions (amount, account, category, type, date, details) VALUES ($amount, $account, $category, $type, $date, $details)`,
@@ -48,11 +53,11 @@ export function useTransactionDb() {
                     $details: data.details
                 }
             );
-
+    
             const insertedRowId = result.lastInsertRowId.toLocaleString();
-
+    
             return { insertedRowId };
-
+    
         } catch (error) {
             throw error;
         }

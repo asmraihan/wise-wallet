@@ -33,18 +33,26 @@ export function useCategoryDb() {
     }
 
 
-    async function searchByName(name: string) {
+    async function searchByName(name?: string, type?: string) {
         try {
-            const query = "SELECT * FROM category WHERE name LIKE ?"
-
-            const response = await sqlite.getAllAsync<CategoryType>(
-                query,
-                `%${name}%`
-            )
-
-            return response
+            let query = "SELECT * FROM category WHERE 1=1";
+            const params: string[] = [];
+    
+            if (name) {
+                query += " AND name LIKE ?";
+                params.push(`%${name}%`);
+            }
+    
+            if (type) {
+                query += " AND type = ?";
+                params.push(type);
+            }
+    
+            const response = await sqlite.getAllAsync<CategoryType>(query, ...params);
+    
+            return response;
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 

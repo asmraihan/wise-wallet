@@ -58,7 +58,7 @@ export default function IncomeScreen() {
   async function getCategories() {
     setIsLoading(true);
     try {
-      const res = await categoryDb.searchByName("");
+      const res = await categoryDb.searchByName("", "INCOME");
       setCategoryData(res)
       setIsLoading(false);
     } catch (error) {
