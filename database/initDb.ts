@@ -1,6 +1,7 @@
 import { type SQLiteDatabase } from "expo-sqlite"
 
 export async function initializeDatabase(database: SQLiteDatabase) {
+
   await database.execAsync(`
     CREATE TABLE IF NOT EXISTS category (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,5 +23,27 @@ export async function initializeDatabase(database: SQLiteDatabase) {
     INSERT INTO account (name, balance) VALUES ('savings', 0)
     ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
   `);
+
+
+  // Create the transaction table
+
+  await database.execAsync(`
+    CREATE TABLE IF NOT EXISTS transactions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      amount REAL NOT NULL,
+      account INTEGER NOT NULL,
+      category INTEGER NOT NULL,
+      type TEXT NOT NULL,
+      date TEXT NOT NULL,
+      details TEXT NOT NULL
+    );
+  `);
+
+    // delete / drop all table
+    // await database.execAsync(`
+    //   DROP TABLE IF EXISTS transaction
+    //   `);
   
+  
+
 }

@@ -25,6 +25,7 @@ import Toast from 'react-native-toast-message';
 import { CategoryType, useCategoryDb } from '~/actions/useCategoryDb';
 import { useFocusEffect } from 'expo-router';
 import { AccountType, useAccountDb } from '~/actions/useAccountDb';
+import { useTransactionDb } from '~/actions/useTransactionDb';
 
 
 
@@ -116,19 +117,24 @@ export default function IncomeScreen() {
     right: 12,
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const transactionDb = useTransactionDb();
 
-    console.log(values, "values");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
 
-    // Alert.alert('Submitted!', JSON.stringify(values, null, 2), [
-    //   {
-    //     text: 'OK',
-    //     onPress: () => {
-    //       scrollRef.current?.scrollTo({ y: 0 });
-    //       form.reset();
-    //     },
-    //   },
-    // ]);
+    // console.log(values, "form values");
+
+    const res = await transactionDb.create({
+      amount: values.amount,
+      account: values.account.value,
+      category: values.category.id,
+      type: 'INCOME',
+      date: values.date,
+      details: values.details || '',
+  });
+
+  console.log(res, "created successfully");
+
+    form.reset();
 
     Toast.show({
       type: 'success',

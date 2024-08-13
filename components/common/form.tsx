@@ -462,7 +462,6 @@ const FormCombobox = React.forwardRef<
   FormItemProps<typeof Combobox, ComboboxOption | null>
 >(({ label, description, value, onChange, ...props }, ref) => {
   const { error, formItemNativeID, formDescriptionNativeID, formMessageNativeID } = useFormField();
-  console.log( props);
   return (
     <FormItem>
       {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
