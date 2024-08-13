@@ -88,12 +88,12 @@ export default function IncomeScreen() {
         message: 'Please select an account.',
       }
     ),
-    category: z.object(
-      { name: z.string(), id: z.number(), type: z.string() },
+    category: z.optional(z.object(
+      { id: z.number(), name: z.string(), type: z.string() },
       {
         message: 'Please select a category.',
       }
-    ),
+    )),
     date: z.string(),
     details: z.optional(z.string()),
 
@@ -103,7 +103,7 @@ export default function IncomeScreen() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       amount: 0,
-      account: undefined,
+      account: { label: 'Select an account', value: 0 },
       category: undefined,
       date: new Date().toDateString(),
       details: '',
@@ -121,12 +121,12 @@ export default function IncomeScreen() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
-    // console.log(values, "form values");
+    console.log(values, "form values");
 
     const res = await transactionDb.create({
       amount: values.amount,
       account: values.account.value,
-      category: values.category.id,
+      category: values.category?.id || null,
       type: 'INCOME',
       date: values.date,
       details: values.details || '',
