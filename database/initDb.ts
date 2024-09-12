@@ -4,36 +4,43 @@ export async function initializeDatabase(database: SQLiteDatabase) {
 
 
   // delete / drop all table
+
   // await database.execAsync(`
-  //   DROP TABLE IF EXISTS transactions
+  //   DROP TABLE IF EXISTS category
   //   `);
-
-
   // await database.execAsync(`
-  //   CREATE TABLE IF NOT EXISTS category (
-  //     id INTEGER PRIMARY KEY AUTOINCREMENT,
-  //     name TEXT NOT NULL,
-  //     type TEXT NOT NULL
-  //   );
-  // `)
-
+  //     DROP TABLE IF EXISTS account
+  //     `);
   // await database.execAsync(`
-  //   CREATE TABLE IF NOT EXISTS account (
-  //     id INTEGER PRIMARY KEY AUTOINCREMENT,
-  //     name TEXT NOT NULL UNIQUE,
-  //     balance REAL NOT NULL
-  //   );
-  //   INSERT INTO account (name, balance) VALUES ('cash', 0)
-  //   ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
-  //   INSERT INTO account (name, balance) VALUES ('card', 0)
-  //   ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
-  //   INSERT INTO account (name, balance) VALUES ('savings', 0)
-  //   ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
-  // `);
+  //     DROP TABLE IF EXISTS transactions
+  //     `);
+
+  // Create the category table
+  await database.execAsync(`
+    CREATE TABLE IF NOT EXISTS category (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      type TEXT NOT NULL
+    );
+  `)
+
+  // Create the account table
+  await database.execAsync(`
+    CREATE TABLE IF NOT EXISTS account (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE,
+      balance REAL NOT NULL
+    );
+    INSERT INTO account (name, balance) VALUES ('cash', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+    INSERT INTO account (name, balance) VALUES ('card', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+    INSERT INTO account (name, balance) VALUES ('savings', 0)
+    ON CONFLICT(name) DO UPDATE SET balance=excluded.balance;
+  `);
 
 
   // Create the transaction table
-
   await database.execAsync(`
     CREATE TABLE IF NOT EXISTS transactions (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

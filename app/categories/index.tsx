@@ -300,7 +300,7 @@ function ListOption({
                   <DialogFooter>
                     <DialogClose asChild>
                       <Button onPress={form.handleSubmit(onSubmit)}>
-                        <Text>Submit</Text>
+                        <Text>Save</Text>
                       </Button>
                     </DialogClose>
                   </DialogFooter>
