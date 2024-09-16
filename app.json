@@ -4,11 +4,11 @@
     "slug": "wise-wallet",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/wallet_icon.png",
+    "icon": "./assets/images/w_icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/wallet_icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/wallet_icon.png",
+        "foregroundImage": "./assets/images/w_icon.png",
         "backgroundColor": "#000000"
       },
       "package": "com.asmraihan.wisewallet"
